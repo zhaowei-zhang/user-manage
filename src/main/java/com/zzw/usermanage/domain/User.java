@@ -16,16 +16,16 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long userid;
+    private Long userId;
 
     @Column
-    private Long usernumber;
+    private Long userNumber;
 
     @Column
-    private String username;
+    private String userName;
 
     @Column
-    private String userpass;
+    private String userPass;
 
     @Column
     private String name;
@@ -33,37 +33,36 @@ public class User {
     @Column
     private Integer age;
 
-
-    public Long getUserid() {
-        return userid;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUserid(Long userid) {
-        this.userid = userid;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
-    public Long getUsernumber() {
-        return usernumber;
+    public Long getUserNumber() {
+        return userNumber;
     }
 
-    public void setUsernumber(Long usernumber) {
-        this.usernumber = usernumber;
+    public void setUserNumber(Long userNumber) {
+        this.userNumber = userNumber;
     }
 
-    public String getUsername() {
-        return username;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public String getUserpass() {
-        return userpass;
+    public String getUserPass() {
+        return userPass;
     }
 
-    public void setUserpass(String userpass) {
-        this.userpass = userpass;
+    public void setUserPass(String userPass) {
+        this.userPass = userPass;
     }
 
     public String getName() {
