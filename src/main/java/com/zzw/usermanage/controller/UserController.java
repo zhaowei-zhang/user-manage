@@ -13,15 +13,25 @@ import org.springframework.web.bind.annotation.*;
  * @author: x.x@hand-china.com
  * @date: 2019/2/21
  */
-@Controller
+@RestController
 public class UserController {
 
     @Autowired
     private UserService userService;
-
+    @Autowired
+    private UserRepository userRepository;
     @PostMapping("/Login")
-    public @ResponseBody User Login(@RequestBody User user) throws Exception{
+    public User Login(@RequestBody User user) throws Exception{
         System.out.println(user);
         return userService.VerifY(user);
     }
+
+    @PostMapping("/jpatest1")
+    public User jpatest1(@RequestBody User user) throws Exception{
+        System.out.println(user);
+        user=userRepository.findOne(user.getUserId());
+        System.out.println(user);
+        return user;
+    }
+
 }

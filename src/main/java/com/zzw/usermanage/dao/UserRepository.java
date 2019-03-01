@@ -2,6 +2,8 @@ package com.zzw.usermanage.dao;
 
 import com.zzw.usermanage.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -12,4 +14,11 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface UserRepository extends JpaRepository<User,Long> {
+
+    @Query(nativeQuery = true,
+            value =
+            "SELECT * FROM user_basic_data where userName = ?1")
+    User getUserByUserName(String userName);
+
+
 }

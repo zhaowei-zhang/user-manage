@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.List;
+
 /**
  * @description:
  * @version: 1.0
@@ -23,13 +25,14 @@ public class UserService {
     private UserRepository userRepository;
 
     public User VerifY(User user) throws Exception{
-        User v=userRepository.fandByUserName(user.getUserName());
+        User v=userRepository.getUserByUserName(user.getUserName());
+        System.out.println(v);
         if(v==null){
             throw new XmException(XmError.USERNAME_ERROR);
         }
-        if(v.getUserPass()!=user.getUserPass()){
-            throw new XmException(XmError.USERPASS_ERROR);
+        if(!v.getPassWord().equals(user.getPassWord())){
+            throw new XmException(XmError.PASSWORD_ERROR);
         }
-        return user;
+        return v;
     }
 }

@@ -16,21 +16,22 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "userid")
     private Long userId;
 
-    @Column
+    @Column(name = "usernumber")
     private Long userNumber;
 
-    @Column
+    @Column(name = "username")
     private String userName;
 
-    @Column
-    private String userPass;
+    @Column(name = "password")
+    private String passWord;
 
-    @Column
+    @Column(name = "name")
     private String name;
 
-    @Column
+    @Column(name = "age")
     private Integer age;
 
     public Long getUserId() {
@@ -57,12 +58,12 @@ public class User {
         this.userName = userName;
     }
 
-    public String getUserPass() {
-        return userPass;
+    public String getPassWord() {
+        return passWord;
     }
 
-    public void setUserPass(String userPass) {
-        this.userPass = userPass;
+    public void setPassWord(String passWord) {
+        this.passWord = passWord;
     }
 
     public String getName() {
@@ -87,7 +88,7 @@ public class User {
                 "userId=" + userId +
                 ", userNumber=" + userNumber +
                 ", userName='" + userName + '\'' +
-                ", userPass='" + userPass + '\'' +
+                ", passWord='" + passWord + '\'' +
                 ", name='" + name + '\'' +
                 ", age=" + age +
                 '}';
