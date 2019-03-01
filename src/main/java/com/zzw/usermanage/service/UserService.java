@@ -18,16 +18,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 @Service
 public class UserService {
+
     @Autowired
     private UserRepository userRepository;
-
-    @GetMapping("/{id}")
-    public User findById(@PathVariable Long id){
-        User findOne;
-        findOne = this.userRepository.findOne(id);
-        return findOne;
-    }
-
 
     public User VerifY(User user) throws Exception{
         User v=userRepository.fandByUserName(user.getUserName());
