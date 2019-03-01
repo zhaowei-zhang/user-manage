@@ -1,0 +1,12 @@
+server:
+  port: 9201
+
+spring:
+  application:
+    name: test-login  #注册到Eureka Server上的应用名称
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:9100/eureka/
+  instance:
+    prefer-ip-address: true  #表示将注解的IP注册到Eureka Server
