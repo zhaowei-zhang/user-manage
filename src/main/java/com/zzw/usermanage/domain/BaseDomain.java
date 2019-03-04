@@ -1,6 +1,7 @@
 package com.zzw.usermanage.domain;
 
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * @description:
@@ -23,17 +24,29 @@ public class BaseDomain {
     protected int versionNumber;
 
     @Column(name = "created_date")
-    protected int createdDate;
+    protected Date createdDate;
 
     @Column(name = "created_by")
     protected int createdBy;
 
     @Column(name = "last_updated_date")
-    protected int lastUpdatedDate;
+    protected Date lastUpdatedDate;
 
     @Column(name = "last_updated_by")
     protected int lastUpdatedBy;
 
+    @Override
+    public String toString() {
+        return "BaseDomain{" +
+                "id=" + id +
+                ", datalag=" + datalag +
+                ", versionNumber=" + versionNumber +
+                ", createdDate=" + createdDate +
+                ", createdBy=" + createdBy +
+                ", lastUpdatedDate=" + lastUpdatedDate +
+                ", lastUpdatedBy=" + lastUpdatedBy +
+                '}';
+    }
 
     public Long getId() {
         return id;
@@ -42,8 +55,6 @@ public class BaseDomain {
     public void setId(Long id) {
         this.id = id;
     }
-
-
 
     public int getDatalag() {
         return datalag;
@@ -61,11 +72,11 @@ public class BaseDomain {
         this.versionNumber = versionNumber;
     }
 
-    public int getCreatedDate() {
+    public Date getCreatedDate() {
         return createdDate;
     }
 
-    public void setCreatedDate(int createdDate) {
+    public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
     }
 
@@ -77,11 +88,11 @@ public class BaseDomain {
         this.createdBy = createdBy;
     }
 
-    public int getLastUpdatedDate() {
+    public Date getLastUpdatedDate() {
         return lastUpdatedDate;
     }
 
-    public void setLastUpdatedDate(int lastUpdatedDate) {
+    public void setLastUpdatedDate(Date lastUpdatedDate) {
         this.lastUpdatedDate = lastUpdatedDate;
     }
 
@@ -91,18 +102,5 @@ public class BaseDomain {
 
     public void setLastUpdatedBy(int lastUpdatedBy) {
         this.lastUpdatedBy = lastUpdatedBy;
-    }
-
-    @Override
-    public String toString() {
-        return "BaseDomain{" +
-                "id=" + id +
-                ", datalag=" + datalag +
-                ", versionNumber=" + versionNumber +
-                ", createdDate=" + createdDate +
-                ", createdBy=" + createdBy +
-                ", lastUpdatedDate=" + lastUpdatedDate +
-                ", lastUpdatedBy=" + lastUpdatedBy +
-                '}';
     }
 }

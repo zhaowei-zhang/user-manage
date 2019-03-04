@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * @description:
  * @version: 1.0
@@ -17,8 +19,12 @@ public interface UserRepository extends JpaRepository<User,Long> {
 
     @Query(nativeQuery = true,
             value =
-            "SELECT * FROM user_basic_data where userName = ?1")
+            "SELECT * FROM user_basic_data where username = ?1")
     User getUserByUserName(String userName);
 
+
+    @Query(nativeQuery = true,
+    value = "select max(id) from user_basic_data")
+    Long getIdMax();
 
 }

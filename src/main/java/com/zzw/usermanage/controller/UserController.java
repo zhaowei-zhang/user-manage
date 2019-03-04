@@ -2,9 +2,9 @@ package com.zzw.usermanage.controller;
 
 import com.zzw.usermanage.dao.UserRepository;
 import com.zzw.usermanage.domain.User;
-import com.zzw.usermanage.service.UserService;
+import com.zzw.usermanage.service.UserServicel;
+import com.zzw.usermanage.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -17,21 +17,18 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     @Autowired
-    private UserService userService;
+    private UserServicel userService;
     @Autowired
     private UserRepository userRepository;
     @PostMapping("/Login")
     public User Login(@RequestBody User user) throws Exception{
         System.out.println(user);
-        return userService.VerifY(user);
+        return userService.verifYh(user);
     }
 
-    @PostMapping("/jpatest1")
+    @PostMapping("/addUser")
     public User jpatest1(@RequestBody User user) throws Exception{
-        System.out.println(user);
-        user=userRepository.findOne(user.getId());
-        System.out.println(user);
-        return user;
+        return userService.addUser(user);
     }
 
 }

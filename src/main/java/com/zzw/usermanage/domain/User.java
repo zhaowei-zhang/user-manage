@@ -18,10 +18,10 @@ public class User extends BaseDomain{
     private Long userNumber;
 
     @Column(name = "username")
-    private String userName;
+    private String username;
 
     @Column(name = "password")
-    private String passWord;
+    private String password;
 
     @Column(name = "name")
     private String name;
@@ -37,20 +37,20 @@ public class User extends BaseDomain{
         this.userNumber = userNumber;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getPassWord() {
-        return passWord;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPassWord(String passWord) {
-        this.passWord = passWord;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getName() {
@@ -73,8 +73,8 @@ public class User extends BaseDomain{
     public String toString() {
         return "User{" +
                 "userNumber=" + userNumber +
-                ", userName='" + userName + '\'' +
-                ", passWord='" + passWord + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
                 ", name='" + name + '\'' +
                 ", age=" + age +
                 ", id=" + id +
