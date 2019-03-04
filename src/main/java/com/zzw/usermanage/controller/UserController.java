@@ -29,7 +29,7 @@ public class UserController {
     @PostMapping("/jpatest1")
     public User jpatest1(@RequestBody User user) throws Exception{
         System.out.println(user);
-        user=userRepository.findOne(user.getUserId());
+        user=userRepository.findOne(user.getId());
         System.out.println(user);
         return user;
     }

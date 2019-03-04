@@ -12,14 +12,9 @@ import java.math.BigDecimal;
  */
 @Entity
 @Table(name = "user_basic_data")
-public class User {
+public class User extends BaseDomain{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "userid")
-    private Long userId;
-
-    @Column(name = "usernumber")
+    @Column(name = "user_number")
     private Long userNumber;
 
     @Column(name = "username")
@@ -33,14 +28,6 @@ public class User {
 
     @Column(name = "age")
     private Integer age;
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
 
     public Long getUserNumber() {
         return userNumber;
@@ -85,12 +72,18 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "userId=" + userId +
-                ", userNumber=" + userNumber +
+                "userNumber=" + userNumber +
                 ", userName='" + userName + '\'' +
                 ", passWord='" + passWord + '\'' +
                 ", name='" + name + '\'' +
                 ", age=" + age +
+                ", id=" + id +
+                ", datalag=" + datalag +
+                ", versionNumber=" + versionNumber +
+                ", createdDate=" + createdDate +
+                ", createdBy=" + createdBy +
+                ", lastUpdatedDate=" + lastUpdatedDate +
+                ", lastUpdatedBy=" + lastUpdatedBy +
                 '}';
     }
 }

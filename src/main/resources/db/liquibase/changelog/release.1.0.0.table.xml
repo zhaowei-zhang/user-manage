@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2017. Shanghai Zhenhui Information Technology Co,. ltd.
+  ~ All rights are reserved.
+  -->
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <property name="now" value="now()" dbms="mysql,h2"/>
+    <property name="now" value="sysdate" dbms="oracle"/>
+    <property name="autoIncrement" value="true" dbms="mysql,h2,postgresql,oracle"/>
+    <property name="amount" value="decimal(20,2)"/>
+    
+    <changeSet id="201903041510001" author="zhaowei.zhang">
+        <createTable tableName="base_domain" remarks="通用信息表">
+            <column name="id" type="bigint" remarks="唯一识别码">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_base_domain"/>
+            </column>
+            <column name="data_flag" type="int" remarks="数据状态" defaultValue="1">
+                <constraints nullable="true"/>
+            </column>
+            <column name="version_number" type="int" remarks="版本号">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="timestamp" defaultValue="${now}" remarks="创建日期">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="bigint" remarks="创建用户ID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_updated_date" type="timestamp" defaultValue="${now}" remarks="最后更新日期">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_updated_by" type="bigint" remarks="最后更新用户ID">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <createTable tableName="user_basic_data" remarks="用户基础信息表">
+
+            <column name="id" type="bigint" remarks="唯一识别码">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_user_basic_data"/>
+            </column>
+
+            <column name="user_number" type="bigint" remarks="用户编号">
+                <constraints nullable="true"/>
+            </column>
+            <column name="age" type="bigint" remarks="用户年龄">
+                <constraints nullable="true"/>
+            </column>
+            <column name="name" type="varchar(200)" remarks="用户名字">
+                <constraints nullable="true"/>
+            </column>
+            <column name="password" type="varchar(2000)" remarks="登陆密码" defaultValue="000000">
+                <constraints nullable="true"/>
+            </column>
+            <column name="username" type="varchar(2000)" remarks="登录名">
+                <constraints nullable="true"/>
+            </column>
+
+
+            <column name="data_flag" type="int" remarks="数据状态" defaultValue="1">
+                <constraints nullable="true"/>
+            </column>
+
+
+            <column name="version_number" type="int" remarks="版本号">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="timestamp" defaultValue="${now}" remarks="创建日期">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="bigint" remarks="创建用户ID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_updated_date" type="timestamp" defaultValue="${now}" remarks="最后更新日期">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_updated_by" type="bigint" remarks="最后更新用户ID">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!---->
+    <!--<changeSet id="2019022611517001" author="ruanliqiu">-->
+        <!--<createTable tableName="am_account_info" remarks="账户信息表">-->
+            <!--<column name="id" type="bigint">-->
+                <!--<constraints nullable="false" primaryKey="true" primaryKeyName="pk_am_account_info"/>-->
+            <!--</column>-->
+            <!--<column name="document_number" type="varchar(100)" remarks="单据编号"/>-->
+            <!--<column name="document_type" type="bigint" remarks="单据类型"/>-->
+            <!--<column name="requisition_date" type="timestamp" remarks="申请日期"/>-->
+            <!--<column name="employee_id" type="bigint" remarks="申请人ID"/>-->
+            <!--<column name="currency_code" type="varchar(10)" remarks="币种"/>-->
+            <!--<column name="remarks" type="varchar(2000)" remarks="备注"/>-->
+            <!--<column name="status" type="int" remarks="账户状态"/>-->
+            <!--<column name="approve_status" type="int" remarks="审批状态"/>-->
+            <!--<column name="company_id" type="bigint" remarks="公司ID"/>-->
+            <!--<column name="set_of_books_id" type="bigint" remarks="账套ID"/>-->
+            <!--<column name="tenant_id" type="bigint" remarks="租户ID"/>-->
+            <!--<column name="department_id" type="bigint" remarks="部门ID"/>-->
+            <!--<column name="open_province" type="varchar(30)" remarks="开户省份"/>-->
+            <!--<column name="open_city" type="varchar(30)" remarks="开户城市"/>-->
+            <!--<column name="open_bank" type="varchar(30)" remarks="开户银行"/>-->
+            <!--<column name="branch_bank" type="varchar(30)" remarks="开户联行号"/>-->
+            <!--<column name="account_property" type="varchar(30)" remarks="账户性质"/>-->
+            <!--<column name="direct_flag" type="boolean" remarks="直连标志"/>-->
+            <!--<column name="ukey_flag" type="boolean" remarks="网银ukey"/>-->
+            <!--<column name="regular_account_flag" type="boolean" remarks="定期账户提醒标志"/>-->
+            <!--<column name="account_use" type="varchar(30)" remarks="账户用途"/>-->
+            <!--<column name="account_name" type="varchar(100)" remarks="户名"/>-->
+            <!--<column name="account_number" type="varchar(100)" remarks="账号"/>-->
+            <!--<column name="account_deposit_type" type="varchar(30)" remarks="账户存款类型"/>-->
+            <!--<column name="fin_official_prime" type="varchar(30)" remarks="预留印鉴"/>-->
+            <!--<column name="open_date" type="timestamp" remarks="开户日期"/>-->
+            <!--<column name="interest_rule_type" type="int" remarks="计息规则id"/>-->
+            <!--<column name="bank_address" type="varchar(200)" remarks="银行地址"/>-->
+            <!--<column name="customer_manager" type="varchar(200)" remarks="客户经理"/>-->
+            <!--<column name="phone" type="varchar(200)" remarks="联系电话"/>-->
+            <!--<column name="account_subjects_code" type="varchar(200)" remarks="核算科目"/>-->
+            <!--<column name="detail_segment_code" type="varchar(200)" remarks="明细段"/>-->
+            <!--<column name="deposit_term" type="int" remarks="存款期限"/>-->
+            <!--<column name="reminder_date" type="timestamp" remarks="到期提醒日期"/>-->
+            <!--<column name="attachment_oid" type="varchar(4000)" remarks="附件OID"/>-->
+            <!--<column name="version_number" type="int" remarks="版本号">-->
+                <!--<constraints nullable="false"/>-->
+            <!--</column>-->
+            <!--<column name="created_date" type="timestamp" defaultValue="${now}" remarks="创建日期">-->
+                <!--<constraints nullable="false"/>-->
+            <!--</column>-->
+            <!--<column name="created_by" type="bigint" remarks="创建用户ID">-->
+                <!--<constraints nullable="false"/>-->
+            <!--</column>-->
+            <!--<column name="last_updated_date" type="timestamp" defaultValue="${now}" remarks="最后更新日期">-->
+                <!--<constraints nullable="false"/>-->
+            <!--</column>-->
+            <!--<column name="last_updated_by" type="bigint" remarks="最后更新用户ID">-->
+                <!--<constraints nullable="false"/>-->
+            <!--</column>-->
+        <!--</createTable>-->
+
+        <!--<createTable tableName="am_account_ukey_info" remarks="账户ukey信息表">-->
+            <!--<column name="id" type="bigint">-->
+                <!--<constraints nullable="false" primaryKey="true" primaryKeyName="pk_am_account_ukey_info"/>-->
+            <!--</column>-->
+            <!--<column name="ukey1_num" type="varchar(50)" remarks="UKEY编号1"/>-->
+            <!--<column name="ukey2_num" type="varchar(50)" remarks="UKEY编号2"/>-->
+            <!--<column name="ukey3_num" type="varchar(50)" remarks="UKEY编号3"/>-->
+            <!--<column name="ukey1_register_name" type="varchar(50)" remarks="登记员工1"/>-->
+            <!--<column name="ukey2_register_name" type="varchar(50)" remarks="登记员工2"/>-->
+            <!--<column name="ukey3_register_name" type="varchar(50)" remarks="登记员工3"/>-->
+            <!--<column name="ukey1_using_name" type="varchar(50)" remarks="使用员工1"/>-->
+            <!--<column name="ukey2_using_name" type="varchar(50)" remarks="使用员工2"/>-->
+            <!--<column name="ukey3_using_name" type="varchar(50)" remarks="使用员工3"/>-->
+            <!--<column name="ukey1_expiry_date" type="timestamp" remarks="UKEY1到期日"/>-->
+            <!--<column name="ukey2_expiry_date" type="timestamp" remarks="UKEY2到期日"/>-->
+            <!--<column name="ukey3_expiry_date" type="timestamp" remarks="UKEY3到期日"/>-->
+            <!--<column name="version_number" type="int" remarks="版本号">-->
+                <!--<constraints nullable="false"/>-->
+            <!--</column>-->
+            <!--<column name="created_date" type="timestamp" defaultValue="${now}" remarks="创建日期">-->
+                <!--<constraints nullable="false"/>-->
+            <!--</column>-->
+            <!--<column name="created_by" type="bigint" remarks="创建用户ID">-->
+                <!--<constraints nullable="false"/>-->
+            <!--</column>-->
+            <!--<column name="last_updated_date" type="timestamp" defaultValue="${now}" remarks="最后更新日期">-->
+                <!--<constraints nullable="false"/>-->
+            <!--</column>-->
+            <!--<column name="last_updated_by" type="bigint" remarks="最后更新用户ID">-->
+                <!--<constraints nullable="false"/>-->
+            <!--</column>-->
+        <!--</createTable>-->
+    <!--</changeSet>-->
+</databaseChangeLog>
