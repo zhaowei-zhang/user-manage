@@ -83,6 +83,18 @@
         </createTable>
     </changeSet>
 
+    <changeSet id="201903051042001" author="zhaowei.zhang">
+        <createTable tableName="token_table">
+            <column name="id" type="bigint" remarks="唯一识别码">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_token_table"/>
+            </column>
+            <column name="token" type="varchar(20)" remarks="token"></column>
+            <column name="token_state" type="int" remarks="token状态"></column>
+            <column name="star_tdate" type="timestamp" defaultValue="${now}" remarks="token生效时间"></column>
+            <column name="end_date" type="timestamp" remarks="token失效时间"></column>
+            <column name="user_id" type="bigint" remarks="对应用户id"></column>
+        </createTable>
+    </changeSet>
     <!---->
     <!--<changeSet id="2019022611517001" author="ruanliqiu">-->
         <!--<createTable tableName="am_account_info" remarks="账户信息表">-->

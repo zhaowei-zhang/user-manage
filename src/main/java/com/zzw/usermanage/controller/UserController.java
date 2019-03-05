@@ -20,6 +20,7 @@ public class UserController {
     private UserServicel userService;
     @Autowired
     private UserRepository userRepository;
+
     @PostMapping("/Login")
     public User Login(@RequestBody User user) throws Exception{
         System.out.println(user);
@@ -30,5 +31,12 @@ public class UserController {
     public User jpatest1(@RequestBody User user) throws Exception{
         return userService.addUser(user);
     }
+
+    @PostMapping("/verifYh")
+    public User verifYh(@RequestBody User user) throws Exception{
+        System.out.println(user);
+        return userService.verifYh(user);
+    }
+
 
 }

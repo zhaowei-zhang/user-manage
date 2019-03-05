@@ -37,13 +37,16 @@ public class UserServiceImpl implements UserServicel {
     }
 
     public String password2Md5(String password){
-        return DigestUtils.md5DigestAsHex((password+Key.MAP.get("md5key")).getBytes());
+        String passwordkey=password+Key.MAP.get("md5key");
+        System.out.println("passwordkey:"+passwordkey);
+        return DigestUtils.md5DigestAsHex((passwordkey).getBytes());
     }
 
     @Override
     public User addUser(User user) {
         Long id=userRepository.getIdMax();
         user.setId(id);
+        System.out.println("id:"+id);
         user.setPassword(this.password2Md5(user.getPassword()));
         user=userRepository.save(user);
         System.out.println("user:"+user);
