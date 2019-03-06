@@ -27,4 +27,8 @@ public interface UserRepository extends JpaRepository<User,Long> {
     value = "select max(id) from user_basic_data")
     Long getIdMax();
 
+
+    @Query(nativeQuery = true,
+    value = "select count(*) from user_basic_data where  username = ?1")
+    int queryCountByUserName(String userName);
 }

@@ -9,10 +9,10 @@ import java.util.Date;
  * @author: x.x@hand-china.com
  * @date: 2019/3/4
  */
+@MappedSuperclass
 public class BaseDomain {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     protected Long id;
 

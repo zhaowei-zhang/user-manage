@@ -9,7 +9,7 @@ import com.zzw.usermanage.domain.User;
  * @date: 2019/3/4
  */
 public interface UserServicel {
-    public User verifYh(User user) throws Exception;
+    public User verifUser(User user) throws Exception;
 
     public User addUser(User user);
 }

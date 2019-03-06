@@ -14,6 +14,19 @@ import java.math.BigDecimal;
 @Table(name = "user_basic_data")
 public class User extends BaseDomain{
 
+    public User(){
+        super();
+    }
+
+    public User(Long id,Long userNumber, String username, String password, String name, Integer age) {
+        this.id=id;
+        this.userNumber = userNumber;
+        this.username = username;
+        this.password = password;
+        this.name = name;
+        this.age = age;
+    }
+
     @Column(name = "user_number")
     private Long userNumber;
 
