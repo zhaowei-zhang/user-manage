@@ -1,5 +1,6 @@
 package com.zzw.usermanage.controller;
 
+import com.zzw.usermanage.domain.TokenPack;
 import com.zzw.usermanage.domain.User;
 import com.zzw.usermanage.xmutil.returnpag.Return;
 import com.zzw.usermanage.service.UserServicel;
@@ -24,6 +25,14 @@ public class UserController {
 
     @Autowired
     private UserServicel userService;
+
+    
+    @PostMapping("/getUserData")
+    public Return getUserData(@RequestBody TokenPack tokenPack){
+        return userService.getUserDataByToken(tokenPack);
+    }
+
+
 
     /**
      * @api {Post} /api/user/login 登陆 api
@@ -52,7 +61,7 @@ public class UserController {
      * }
      */
     @PostMapping("/login")
-    public Return login(@RequestBody User user) throws Exception{
+    public Return login(@RequestBody User user) {
         System.out.println(user);
         return userService.verifUser(user);
     }

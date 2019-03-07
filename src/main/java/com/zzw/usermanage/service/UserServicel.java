@@ -1,5 +1,6 @@
 package com.zzw.usermanage.service;
 
+import com.zzw.usermanage.domain.TokenPack;
 import com.zzw.usermanage.domain.User;
 import com.zzw.usermanage.xmutil.returnpag.Return;
 
@@ -10,7 +11,9 @@ import com.zzw.usermanage.xmutil.returnpag.Return;
  * @date: 2019/3/4
  */
 public interface UserServicel {
-    public Return verifUser(User user) throws Exception;
+    Return verifUser(User user);
 
-    public Return addUser(User user);
+    Return addUser(User user);
+
+    Return getUserDataByToken(TokenPack token);
 }

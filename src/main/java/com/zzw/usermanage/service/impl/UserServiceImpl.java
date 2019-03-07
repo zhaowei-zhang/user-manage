@@ -4,6 +4,7 @@ import com.zzw.usermanage.dao.TokenRepository;
 import com.zzw.usermanage.dao.UserRepository;
 import com.zzw.usermanage.domain.TokenPack;
 import com.zzw.usermanage.domain.User;
+import com.zzw.usermanage.xmutil.returnpag.UserDataReturn;
 import com.zzw.usermanage.xmutil.returnpag.UserReturn;
 import com.zzw.usermanage.xmutil.returnpag.Return;
 import com.zzw.usermanage.xmutil.returnpag.SuccessReturn;
@@ -49,6 +50,68 @@ public class UserServiceImpl implements UserServicel {
     private TokenRepository tokenRepository;
 
     /**
+     * 检验token是否可用
+     * @param token
+     * @return
+     */
+    private boolean verifToken(String token) throws XmException{
+        TokenPack tokenPack=tokenRepository.queryToken(token);
+
+        if(tokenPack==null){
+            throw new XmException(XmError.TOKEN_NO_AVAIL);
+        }
+        return true;
+    }
+
+    /**
+     * 根据token获取用户信息
+     * @param tokenPack
+     * @return
+     */
+    @Override
+    public Return getUserDataByToken(TokenPack tokenPack){
+        User user=null;
+        UserDataReturn userDataReturn=null;
+        System.out.println("token:"+tokenPack.getToken());
+        try {
+            if(verifToken(tokenPack.getToken())){
+                Long userId=tokenRepository.getUserIdByToken(tokenPack.getToken());
+                user=userRepository.findOne(userId);
+//                System.out.println("user:"+user);
+                if(user==null){
+                    throw new XmException(XmError.USER_NO_AVAIL);
+                }
+                userDataReturn=new UserDataReturn(user,tokenPack.getToken());
+                userDataReturn.setSuccess(true);
+            }
+        }catch (Exception e){
+            userDataReturn=new UserDataReturn();
+            userDataReturn.setSuccess(false);
+            userDataReturn.setException(e.getMessage());
+        }
+//        System.out.println(userDataReturn);
+        return userDataReturn;
+    }
+
+    /**
+     * 用户信息修改
+     * @param user2
+     * @param token
+     * @return
+     */
+    public Return updateUser(User user2,String token){
+        UserReturn userReturn=new UserReturn();
+
+
+
+        return userReturn;
+    }
+
+
+
+
+
+    /**
      * 验证用户账号密码是否正确
      * @param user
      * @return
@@ -77,7 +140,7 @@ public class UserServiceImpl implements UserServicel {
                 return returnData;
             }
         }
-        catch (XmException e){
+        catch (Exception e){
             returnData.setSuccess(false);
             returnData.setException(e.getMessage());
             return returnData;
@@ -136,7 +199,7 @@ public class UserServiceImpl implements UserServicel {
             successReturn.setSuccess(true);
             return successReturn;
         }
-        catch (XmException e){
+        catch (Exception e){
             successReturn.setSuccess(false);
             successReturn.setException(e.getMessage());
             return successReturn;

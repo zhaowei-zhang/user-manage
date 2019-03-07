@@ -30,4 +30,12 @@ public interface TokenRepository extends JpaRepository<TokenPack,Long> {
     @Modifying
     void freeAllToken();
 
+
+    @Query(nativeQuery = true,
+    value = "select a.user_id from token_table a where a.token = ?1")
+    Long getUserIdByToken(String token);
+
+    @Query(nativeQuery = true,
+    value = "select * from token_table a  where a.token = ?1 and a.token_state = 1")
+    TokenPack queryToken(String token);
 }
