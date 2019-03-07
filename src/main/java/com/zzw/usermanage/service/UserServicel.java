@@ -1,6 +1,7 @@
 package com.zzw.usermanage.service;
 
 import com.zzw.usermanage.domain.User;
+import com.zzw.usermanage.xmutil.returnpag.Return;
 
 /**
  * @description:
@@ -9,7 +10,7 @@ import com.zzw.usermanage.domain.User;
  * @date: 2019/3/4
  */
 public interface UserServicel {
-    public User verifUser(User user) throws Exception;
+    public Return verifUser(User user) throws Exception;
 
-    public User addUser(User user);
+    public Return addUser(User user);
 }

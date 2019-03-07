@@ -1,9 +1,8 @@
 package com.zzw.usermanage.controller;
 
-import com.zzw.usermanage.dao.UserRepository;
 import com.zzw.usermanage.domain.User;
+import com.zzw.usermanage.xmutil.returnpag.Return;
 import com.zzw.usermanage.service.UserServicel;
-import com.zzw.usermanage.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +19,6 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/user")
 public class UserController {
-    //aaaaaaaaaaaaaaaaaaaaaaa
 
 
 
@@ -47,22 +45,14 @@ public class UserController {
      *
      * @apiSuccessExample {json} 成功返回值:
      * {
-     *     "id": 1,
-     *     "datalag": 0,
-     *     "versionNumber": 0,
-     *     "createdDate": 1551836927000,
-     *     "createdBy": 0,
-     *     "lastUpdatedDate": 1551836927000,
-     *     "lastUpdatedBy": 0,
-     *     "userNumber": 865533614,
-     *     "username": "admin",
-     *     "password": "1eb1f481ceaf83536f48b38d1d330e91",
+     *     "userNumber": XXXXXX,
      *     "name": "张照威",
-     *     "age": 24
+     *     "token": "XXXXXXXXXXXXXXXX",
+     *     "exception": null
      * }
      */
     @PostMapping("/login")
-    public User login(@RequestBody User user) throws Exception{
+    public Return login(@RequestBody User user) throws Exception{
         System.out.println(user);
         return userService.verifUser(user);
     }
@@ -110,7 +100,7 @@ public class UserController {
      * }
      */
     @PostMapping("/addUser")
-    public User addUser(@RequestBody User user) throws Exception{
+    public Return addUser(@RequestBody User user) throws Exception{
         return userService.addUser(user);
     }
 

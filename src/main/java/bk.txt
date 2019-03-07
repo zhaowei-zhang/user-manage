@@ -1,1 +1,2 @@
 apidoc -i src/main/java -o apidoc/
+update token_table a set a.user_id = 0

@@ -7,5 +7,5 @@ package com.zzw.usermanage.yc;
  * @date: 2019/3/1
  */
 public enum XmError {
-    T1,T2,USERNAME_ERROR,PASSWORD_ERROR;
+    T1,T2,USERNAME_ERROR,PASSWORD_ERROR,NO_FREE_TOKEN,ADD_USERNAME_REPEAT;
 }

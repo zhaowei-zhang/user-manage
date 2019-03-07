@@ -125,7 +125,7 @@
       "examples": [
         {
           "title": "成功返回值:",
-          "content": "{\n    \"id\": 1,\n    \"datalag\": 0,\n    \"versionNumber\": 0,\n    \"createdDate\": 1551836927000,\n    \"createdBy\": 0,\n    \"lastUpdatedDate\": 1551836927000,\n    \"lastUpdatedBy\": 0,\n    \"userNumber\": 865533614,\n    \"username\": \"admin\",\n    \"password\": \"1eb1f481ceaf83536f48b38d1d330e91\",\n    \"name\": \"张照威\",\n    \"age\": 24\n}",
+          "content": "{\n    \"userNumber\": XXXXXX,\n    \"name\": \"张照威\",\n    \"token\": \"XXXXXXXXXXXXXXXX\",\n    \"exception\": null\n}",
           "type": "json"
         }
       ]

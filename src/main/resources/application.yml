@@ -10,8 +10,10 @@ spring:
   datasource:
     username: root
     password: abc@1234
+#    password: 000000
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://rm-bp1014ie345y164lbho.mysql.rds.aliyuncs.com:3306/xm_user?useUnicode=true&characterEncoding=utf8
+#    url: jdbc:mysql://127.0.0.1:3306/xm_user?characterEncoding=utf8
     druid:
       initial-size: 1
       min-idle: 1
