@@ -1,6 +1,5 @@
 package com.zzw.usermanage.xmutil.returnpag;
 
-import com.zzw.usermanage.domain.TokenPack;
 import com.zzw.usermanage.domain.User;
 
 /**

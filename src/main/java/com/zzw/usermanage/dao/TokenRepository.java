@@ -22,7 +22,7 @@ public interface TokenRepository extends JpaRepository<TokenPack,Long> {
 
 
     @Query(nativeQuery = true,
-            value = "select a.* from token_table a where a.user_id = 0")
+            value = "select a.* from token_table a where a.user_id = -1")
     TokenPack[] getFreeTokenList();
 
     @Query(nativeQuery = true,

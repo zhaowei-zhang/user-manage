@@ -35,6 +35,14 @@ public interface UserRepository extends JpaRepository<User,Long> {
     int queryCountByUserName(String userName);
 
 
+    @Query(nativeQuery = true,
+    value = "update user_basic_data a " +
+            "set a.username= ?1,a.password = ?2," +
+            "a.name=?3,a.age=?4,a.last_updated_by = ?6," +
+            "a.last_updated_date= SYSDATE() " +
+            "where a.id=?5 ")
+    @Modifying
+    int updateUserData(String username,String password,String name,int age,Long id,Long lastId);
 
     //String getToken();
 }

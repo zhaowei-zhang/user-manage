@@ -8,6 +8,7 @@ package com.zzw.usermanage.xmutil;
  */
 public class MyUtil {
 
-
+    public static void ExceptionHandle(){
+    }
 
 }

@@ -2,13 +2,17 @@ package com.zzw.usermanage.controller;
 
 import com.zzw.usermanage.domain.TokenPack;
 import com.zzw.usermanage.domain.User;
+import com.zzw.usermanage.xmutil.returnpag.MapReturn;
 import com.zzw.usermanage.xmutil.returnpag.Return;
 import com.zzw.usermanage.service.UserServicel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
- /**
+
+/**
  * @apiDefine UserController 用户控制器
  */
 /**
@@ -26,7 +30,34 @@ public class UserController {
     @Autowired
     private UserServicel userService;
 
-    
+    /**
+     * @api {Post} /api/user/getUserData 登陆 api
+     * @apiName getUserData
+     * @apiGroup UserController
+     *
+     * @apiParam {String}   token 登录人token
+     *
+     * @apiParamExample {json} 请求参数:
+     * {
+     *        "token":"xxxxxxxxxxxxxxxxxxx"
+     * }
+     *
+     *
+     * @apiSuccess {int} 0 变更行数
+     *
+     *
+     * @apiSuccessExample {json} 成功返回值:
+     * {
+     *     "success": true,
+     *     "exception": null,
+     *     "userNumber": 865533614,
+     *     "username": "admin",
+     *     "password": "1eb1f481ceaf83536f48b38d1d330e91",
+     *     "name": "张照威",
+     *     "age": 24,
+     *     "token": "xxxxxxxxxxxxxxxxxxxx"
+     * }
+     */
     @PostMapping("/getUserData")
     public Return getUserData(@RequestBody TokenPack tokenPack){
         return userService.getUserDataByToken(tokenPack);
@@ -109,12 +140,29 @@ public class UserController {
      * }
      */
     @PostMapping("/addUser")
-    public Return addUser(@RequestBody User user) throws Exception{
+    public Return addUser(@RequestBody User user){
         return userService.addUser(user);
     }
 
 
+    @PutMapping("/updateUser")
+    public Return updateUser(@RequestBody User user, HttpServletRequest request){
+        String token=request.getHeader("token");
+        System.out.println(token);
+        TokenPack tokenPack=new TokenPack();
+        tokenPack.setToken(token);
+        return userService.updateUser(user,tokenPack);
+    }
 
 
+    @PostMapping("/test")
+    public Return test(){
+        MapReturn mapReturn=new MapReturn();
+        mapReturn.add("name","张照威");
+        mapReturn.add("user",new User(1L,1L,"a","a","a",1));
+        MapReturn mapReturn2=new MapReturn();
+        mapReturn2.add("m2",mapReturn);
+        return mapReturn2;
+    }
 
 }

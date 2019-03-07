@@ -4,19 +4,19 @@ import com.zzw.usermanage.dao.TokenRepository;
 import com.zzw.usermanage.dao.UserRepository;
 import com.zzw.usermanage.domain.TokenPack;
 import com.zzw.usermanage.domain.User;
-import com.zzw.usermanage.xmutil.returnpag.UserDataReturn;
-import com.zzw.usermanage.xmutil.returnpag.UserReturn;
-import com.zzw.usermanage.xmutil.returnpag.Return;
-import com.zzw.usermanage.xmutil.returnpag.SuccessReturn;
+import com.zzw.usermanage.xmutil.returnpag.*;
 import com.zzw.usermanage.service.UserServicel;
 import com.zzw.usermanage.yc.Key;
 import com.zzw.usermanage.yc.XmError;
 import com.zzw.usermanage.yc.XmException;
+import org.hibernate.boot.model.source.spi.SingularAttributeSourceToOne;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
+import org.springframework.util.SocketUtils;
 
 import javax.transaction.Transactional;
+import java.util.Map;
 import java.util.Random;
 
 /**
@@ -49,6 +49,54 @@ public class UserServiceImpl implements UserServicel {
     @Autowired
     private TokenRepository tokenRepository;
 
+
+
+
+
+
+    @Override
+    public Return deleteUser(TokenPack token) {
+        return null;
+    }
+
+
+    /**
+     * 用户修改
+     * @param new_user
+     * @param token
+     * @return
+     */
+    @Override
+    public Return updateUser(User new_user, TokenPack token) {
+        MapReturn mapReturn=new MapReturn();
+        try {
+            Return user=this.getUserDataByToken(token);
+            new_user.setId(((User)((MapReturn)user).getMap().get(ReturnData.user)).getId());
+            if(new_user.getUsername()!=null){  }
+            else{new_user.setUsername((String)((MapReturn)user).getMap().get("username"));}
+
+            if(new_user.getName()!=null){ }
+            else{new_user.setName((String)((MapReturn)user).getMap().get("name"));}
+
+            if(new_user.getAge()!=null){ }
+            else{new_user.setAge(Integer.valueOf((String)((MapReturn)user).getMap().get("name")));}
+
+            if(new_user.getPassword()!=null){ new_user.setPassword(this.password2Md5(new_user.getPassword()));}
+            else{new_user.setPassword((String)((MapReturn)user).getMap().get("password"));}
+            System.out.println("new_user:"+new_user);
+            int count=userRepository.updateUserData(new_user.getUsername(),new_user.getPassword(),
+                    new_user.getName(),new_user.getAge(),new_user.getId(),new_user.getId());
+            if(count!=1){
+                throw new XmException(XmError.UPDATE_ERROR);
+            }
+            mapReturn.add(ReturnData.success,true);
+        }catch (Exception e){
+            mapReturn.add(ReturnData.success,false);
+            mapReturn.add(ReturnData.exception,e.getMessage());
+        }
+        return mapReturn;
+    }
+
     /**
      * 检验token是否可用
      * @param token
@@ -71,27 +119,26 @@ public class UserServiceImpl implements UserServicel {
     @Override
     public Return getUserDataByToken(TokenPack tokenPack){
         User user=null;
-        UserDataReturn userDataReturn=null;
-        System.out.println("token:"+tokenPack.getToken());
+        MapReturn mapReturn=new MapReturn();
+        mapReturn.add(ReturnData.tokenPack,tokenPack);
         try {
             if(verifToken(tokenPack.getToken())){
                 Long userId=tokenRepository.getUserIdByToken(tokenPack.getToken());
                 user=userRepository.findOne(userId);
-//                System.out.println("user:"+user);
                 if(user==null){
                     throw new XmException(XmError.USER_NO_AVAIL);
                 }
-                userDataReturn=new UserDataReturn(user,tokenPack.getToken());
-                userDataReturn.setSuccess(true);
+                mapReturn.add(ReturnData.user,user);
+                mapReturn.add(ReturnData.success,true);
             }
         }catch (Exception e){
-            userDataReturn=new UserDataReturn();
-            userDataReturn.setSuccess(false);
-            userDataReturn.setException(e.getMessage());
+            mapReturn.add(ReturnData.success,false);
+            mapReturn.add(ReturnData.exception,e.getMessage());
         }
 //        System.out.println(userDataReturn);
-        return userDataReturn;
+        return mapReturn;
     }
+
 
     /**
      * 用户信息修改
